@@ -1,0 +1,9 @@
+
+.powered-by {
+    font-size: 10px;
+    color: grey !important;
+  }
+
+  div:not(.nav-align-left):not(.nav-align-right) > .nav-tabs {
+    width: auto !important;
+}

@@ -1,0 +1,89 @@
+        body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0; /* Set a background color */
+    }
+
+    .container {
+        width: 80%; /* Set the width of the container */
+        max-width: 800px; /* Set a maximum width */
+        padding: 20px; /* Add some padding */
+        background-color: #ffffff; /* Set a background color */
+        border-radius: 10px; /* Add some border radius for rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a box shadow for a subtle effect */
+    }
+
+    .title {
+        text-align: center; /* Center align the text */
+        color: #333333; /* Set the text color */
+        margin-bottom: 20px; /* Add some margin to separate from other elements */
+    }
+
+    .form-group {
+        margin-bottom: 20px; /* Add some margin to separate form groups */
+    }
+
+    label {
+        display: block; /* Display labels as block elements */
+        margin-bottom: 5px; /* Add some margin below labels */
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%; /* Set the input width to fill the container */
+        padding: 10px; /* Add some padding */
+        border: 1px solid #cccccc; /* Add a border */
+        border-radius: 5px; /* Add some border radius */
+    }
+
+    button {
+        width: 100%; /* Set the button width to fill the container */
+        padding: 10px; /* Add some padding */
+        background-color: #007bff; /* Set the background color */
+        color: #ffffff; /* Set the text color */
+        border: none; /* Remove the border */
+        border-radius: 5px; /* Add some border radius */
+        cursor: pointer; /* Change cursor to pointer on hover */
+    }
+
+    button:hover {
+        background-color: #0056b3; /* Change background color on hover */
+    }
+
+
+        form {
+            text-align: center;
+            justify-content: center;
+        }
+
+        .error-message {
+            display: none;
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        #customAlert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #4CAF50; / Green background /
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label{
+            color:#007bff;
+            }
+
+        textarea#promptText {
+            font-size: 18px;
+            font-family: cursive;

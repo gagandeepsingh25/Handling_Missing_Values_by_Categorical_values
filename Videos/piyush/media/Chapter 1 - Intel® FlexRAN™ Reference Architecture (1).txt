@@ -1,0 +1,374 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:05.267
+Hello and welcome to the Intel Telco
+Cloud Academy.
+
+00:00:06.167 --> 00:00:10.133
+This lesson is on virtualized
+Radio Access Network software,
+
+00:00:10.133 --> 00:00:13.167
+or vRAN software.
+
+00:00:13.167 --> 00:00:14.400
+In this lesson,
+
+00:00:14.400 --> 00:00:17.133
+we will cover some of the
+important software concepts
+
+00:00:17.133 --> 00:00:20.233
+that Intel delivers
+to the vRAN ecosystem
+
+00:00:20.267 --> 00:00:23.067
+through the
+FlexRAN Reference Architecture.
+
+00:00:23.533 --> 00:00:26.867
+First, we will learn about
+the FlexRANâ„¢ Reference Architecture,
+
+00:00:26.867 --> 00:00:30.400
+what it is
+and what it is not.
+
+00:00:30.400 --> 00:00:34.200
+Then, we'll discuss how the
+FlexRAN Reference Architecture
+
+00:00:34.233 --> 00:00:37.900
+fits into the wider
+vRAN software ecosystem
+
+00:00:37.900 --> 00:00:42.533
+and talk about some use cases,
+plus the software development kit.
+
+00:00:43.367 --> 00:00:47.267
+After that, we'll deep dive
+into the FlexRAN software
+
+00:00:47.267 --> 00:00:49.333
+and the BBU pooling architecture,
+
+00:00:49.333 --> 00:00:51.600
+which is a software architecture
+
+00:00:51.600 --> 00:00:57.233
+employed to deliver baseband
+pooling and CPU core scaling.
+
+00:00:57.233 --> 00:01:01.067
+The final section will cover Cloud
+Native RAN building blocks
+
+00:01:01.067 --> 00:01:04.967
+such as the Linux OS,
+containers, and DPDK,
+
+00:01:05.033 --> 00:01:07.033
+which are fundamental in order
+
+00:01:07.033 --> 00:01:08.767
+to achieve the high performance
+
+00:01:08.767 --> 00:01:13.100
+and low latency required
+for 5G networks.
+
+00:01:14.000 --> 00:01:15.600
+After viewing this course,
+
+00:01:15.600 --> 00:01:16.667
+the learner should be able
+
+00:01:16.667 --> 00:01:19.800
+to identify the Intel software
+wireless technologies
+
+00:01:19.800 --> 00:01:21.167
+that enable vRAN
+
+00:01:21.167 --> 00:01:22.467
+and how they are delivered
+
+00:01:22.467 --> 00:01:24.800
+in the
+FlexRAN Reference Architecture.
+
+00:01:25.500 --> 00:01:27.600
+Also, you should
+be able to illustrate
+
+00:01:27.600 --> 00:01:31.667
+the benefits of vRAN software
+wireless technologies,
+
+00:01:31.667 --> 00:01:33.933
+and examine how FlexRANâ„¢ software
+
+00:01:33.933 --> 00:01:36.433
+integrates with third-party software
+
+00:01:36.433 --> 00:01:39.800
+to enable commercial
+vRAN implementations.
+
+00:01:40.733 --> 00:01:42.233
+This section will provide
+
+00:01:42.233 --> 00:01:45.667
+an overview of the
+FlexRAN Reference Architecture.
+
+00:01:45.700 --> 00:01:48.000
+Let's get started.
+
+00:01:48.000 --> 00:01:51.067
+FlexRAN Reference Architecture
+is a software
+
+00:01:51.067 --> 00:01:53.500
+and hardware Reference Architecture
+
+00:01:53.500 --> 00:01:56.100
+to enable the software RAN ecosystem
+
+00:01:56.100 --> 00:01:59.700
+to build and deploy
+highly-optimized, feature-rich
+
+00:01:59.833 --> 00:02:04.267
+4G and 5G scalable
+Cloud Native vRAN implementations
+
+00:02:04.267 --> 00:02:07.633
+on Intel architecture.
+
+00:02:07.667 --> 00:02:09.733
+The FlexRANâ„¢ Reference Architecture
+
+00:02:09.733 --> 00:02:11.767
+supports an entire portfolio
+
+00:02:11.800 --> 00:02:16.500
+of 4G and 5G pre-integrated software
+and hardware stacks
+
+00:02:16.500 --> 00:02:20.533
+running virtualized
+Distributed Units or vDUs.
+
+00:02:20.533 --> 00:02:22.800
+The FlexRAN Reference Architecture
+
+00:02:22.800 --> 00:02:24.533
+can also be used
+to implement
+
+00:02:24.533 --> 00:02:28.833
+virtualized Centralized Unit,
+or vCU, software.
+
+00:02:28.833 --> 00:02:32.667
+From a single software code base,
+the Intel FlexRAN software
+
+00:02:32.733 --> 00:02:35.967
+can be scaled to support
+narrow band, mid band,
+
+00:02:35.967 --> 00:02:38.867
+Ultra-Reliable
+Low Latency Communications,
+
+00:02:38.867 --> 00:02:42.700
+and even millimeter
+wave configurations.
+
+00:02:42.700 --> 00:02:45.433
+As the software architecture
+is flexible,
+
+00:02:45.467 --> 00:02:49.667
+the user can determine the best
+configuration for their use case
+
+00:02:49.667 --> 00:02:54.067
+and even mix and match
+4G and 5G in the same BBU pool
+
+00:02:54.067 --> 00:02:58.733
+for Decision Support System
+or DSS support.
+
+00:02:58.800 --> 00:03:00.867
+FlexRAN Reference Architecture
+
+00:03:00.867 --> 00:03:02.400
+builds on a foundation
+
+00:03:02.400 --> 00:03:05.367
+of a common,
+scalable hardware platform
+
+00:03:05.400 --> 00:03:08.833
+using Intel silicon and innovation.
+
+00:03:08.867 --> 00:03:11.467
+This includes Intel Xeon CPUs,
+
+00:03:11.467 --> 00:03:16.000
+structured Application Specific
+Integrated Circuit, or eASIC,
+
+00:03:16.000 --> 00:03:18.600
+accelerators for
+Forward Error Correction,
+
+00:03:18.600 --> 00:03:23.867
+and ethernet products for low latency
+fronthaul connectivity.
+
+00:03:24.000 --> 00:03:25.667
+As a software implementation,
+
+00:03:25.667 --> 00:03:28.133
+the FlexRAN Reference Architecture
+
+00:03:28.133 --> 00:03:31.700
+is fully flexible
+and scalable across multiple
+
+00:03:31.700 --> 00:03:34.833
+use cases and hardware platforms.
+
+00:03:34.833 --> 00:03:37.833
+This allows the solution
+to scale from Small Cell
+
+00:03:37.833 --> 00:03:42.233
+with Intel Xeon D processors
+up to macro and C-RAN
+
+00:03:42.267 --> 00:03:45.333
+with Intel Xeon Scalable processors,
+
+00:03:45.367 --> 00:03:48.533
+all with the same
+scalable software solution,
+
+00:03:48.567 --> 00:03:50.733
+delivering on the
+disaggregated hardware
+
+00:03:50.733 --> 00:03:54.967
+and software promise
+of virtualized RAN.
+
+00:03:55.067 --> 00:03:58.833
+The Intel Select Solutions for
+Virtual Radio Access Network
+
+00:03:58.833 --> 00:04:02.233
+offer operators
+a streamlined path to deployment
+
+00:04:02.233 --> 00:04:05.067
+with validated stacks of
+hardware and software
+
+00:04:05.067 --> 00:04:08.467
+built in conjunction
+with other industry leaders
+
+00:04:08.467 --> 00:04:11.867
+for flexible performance
+and rock-solid security.
+
+00:04:12.167 --> 00:04:16.067
+Find out more on the
+Intel Network Builders website.
+
+00:04:16.100 --> 00:04:20.133
+A link is also provided
+at the end of this course.
+
+00:04:20.667 --> 00:04:22.567
+The FlexRAN Reference
+Architecture
+
+00:04:22.567 --> 00:04:25.133
+is designed to be flexible,
+
+00:04:25.167 --> 00:04:28.933
+giving developers access to a set
+of optimized libraries
+
+00:04:28.933 --> 00:04:31.933
+for 4G and 5G workload acceleration
+
+00:04:31.933 --> 00:04:35.833
+in the form
+of the Software Development Kits.
+
+00:04:35.867 --> 00:04:39.267
+The Software Development Kits
+are packaged modularly
+
+00:04:39.267 --> 00:04:40.967
+so that they can be used
+
+00:04:40.967 --> 00:04:45.200
+as part of the overall solution
+or taken independently.
+
+00:04:45.233 --> 00:04:50.033
+They provide the building blocks
+to create the DU reference stack.
+
+00:04:50.067 --> 00:04:52.933
+FlexRAN software
+integrates seamlessly
+
+00:04:52.933 --> 00:04:54.533
+with the
+Cloud Native RAN building blocks
+
+00:04:54.533 --> 00:04:56.867
+for scalable, automated deployment,
+
+00:04:56.867 --> 00:04:59.633
+supporting multiple operating systems
+
+00:04:59.633 --> 00:05:03.267
+and Containers-as-a-Service,
+or CaaS, providers.
+
+00:05:03.300 --> 00:05:07.033
+A software-based
+RAN implementation can scale quickly
+
+00:05:07.033 --> 00:05:10.733
+and easily
+through many different deployments.
+
+00:05:11.200 --> 00:05:13.300
+Now that we've seen an overview
+
+00:05:13.300 --> 00:05:15.667
+of the
+FlexRANâ„¢ Reference Architecture,
+
+00:05:15.667 --> 00:05:18.433
+watch the next video
+to learn more about
+
+00:05:18.433 --> 00:05:21.767
+the FlexRAN software
+and its use cases,
+
+00:05:21.767 --> 00:05:24.300
+software development kit.

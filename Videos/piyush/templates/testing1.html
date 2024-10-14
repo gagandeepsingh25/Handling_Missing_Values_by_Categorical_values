@@ -1,0 +1,541 @@
+{% load static %}
+<html data-build="prod-f2026b4" class="light" lang="en-US" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/assets/img/main_img/android-icon-36x36.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/main_img/android-icon-36x36.png' %}">
+
+<link rel="stylesheet" href="{% static 'assets/vendor/libs/sweetalert2/sweetalert2.css' %}"/>
+
+    <title>Demo AI</title>
+    <meta name="title" content="Demo">
+    <meta name="description" content="Demo ">
+    <meta property="og:description" content="A conversational AI system that listens, learns, and challenges">
+    <link rel="stylesheet" href="https://cdn.oaistatic.com/_next/static/css/447fa8a2621cc481.css" crossorigin="anonymous" data-n-g="">
+    <meta name="msapplication-TileColor" content="#414299">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#414299">
+
+    <meta property="og:image" content="http://coderun.ai/static/images/snippets/main.png"/>
+    <meta property="vk:image" content="http://coderun.ai/static/images/snippets/main1.png"/>
+    <meta itemProp="image" content="http://coderun.ai/static/images/snippets/main.png"/>
+
+<style type="text/css">
+    /* Font face */
+    @font-face {
+      font-weight: 400;
+      font-style: normal;
+      font-family: circular;
+    }
+
+    @font-face {
+      font-weight: 700;
+      font-style: normal;
+      font-family: circular;
+    }
+
+    /* General styles */
+    .scrollHeight {
+        overflow-y: scroll;
+        height: 80%;
+    }
+
+    .fixPosition {
+        position: fixed;
+        bottom: 0px;
+        color: black;
+        background-color: white;
+    }
+
+    .centered-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Adjust as needed */
+    }
+
+    .centered-container img {
+        width: 60px; /* Ensure the image doesn't exceed the container width */
+        margin-bottom: 15px; /* Space between image and text */
+    }
+
+    #customAlert {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #4CAF50; /* Green background */
+        color: white;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Button Loader */
+    .button-loader {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .button-loader > div {
+      width: 0.8rem;
+      height: 0.8rem;
+      background-color: black;
+      border-radius: 50%;
+      animation: 1.2s infinite ease-in-out load;
+    }
+
+    .button-loader div:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+
+    .button-loader div:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+
+    @keyframes load {
+      0%, 40%, 80%, 100% {
+        transform: scale(0);
+      }
+      40% {
+        transform: scale(0.5);
+      }
+      80% {
+        transform: scale(1);
+      }
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    /* Style for the modal */
+    #addFileModel {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        transition: opacity 0.3s ease;
+    }
+
+    /* Modal content */
+    .modal-content {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        width: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Close button */
+    #closeFileModel {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        top: 5px;
+        right: 20px;
+    }
+
+    #closeFileModel:hover,
+    #closeFileModel:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* File upload styles */
+    .file-upload {
+        width: 300px;
+        margin: 30px 0px;
+        transition: filter 0.3s ease;
+    }
+
+    .file-input {
+        display: none;
+    }
+
+    .uploadFormDiv {}
+
+    .file-label {
+        background-color: #292929;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .file-name {
+        margin-top: 10px;
+        margin-left: 5px;
+    }
+
+    /* Overlay layer */
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(197, 197, 197, 0.5); /* Semi-transparent black background */
+        z-index: 9;
+    }
+
+    /* Special class for animation and loading */
+    .r34K7X1zGgAi6DllVF3T {
+        box-sizing: border-box;
+        border: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        z-index: 2147483647;
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 300ms linear;
+        height: 0;
+        width: 0;
+        max-height: 0;
+        display: block;
+    }
+
+    .r34K7X1zGgAi6DllVF3T.active {
+        display: block;
+        visibility: visible;
+        max-height: none;
+        opacity: 1;
+        pointer-events: inherit;
+        position: inherit;
+    }
+
+    .r34K7X1zGgAi6DllVF3T.active.show.lightbox {
+        position: fixed;
+        width: 100% !important;
+        height: 100% !important;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    @-moz-document url-prefix('') {
+        .r34K7X1zGgAi6DllVF3T {
+            visibility: visible;
+            display: block;
+        }
+    }
+</style>
+</head>
+<body class="antialiased"
+      bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCIsIlBJTlRFUkVTVCI6ImRpc2FibGVkIiwiSU5TVEFHUkFNIjoiZGlzYWJsZWQiLCJDT05GSUciOiJkaXNhYmxlZCJ9LCJ2ZXJzaW9uIjoiMi4wLjEyIiwic2NvcmUiOjIwMDEyfV0="
+      data-new-gr-c-s-loaded="14.1157.0" cz-shortcut-listen="true" data-new-gr-c-s-check-loaded="14.1157.0"
+      data-gr-ext-installed="">
+    <div id="__next" >
+
+        <div class="relative z-0 flex h-full w-full overflow-hidden" >
+            <div class="relative flex h-full max-w-full flex-1 flex-col overflow-hidden" >
+                <main class="relative h-full w-full flex-1 overflow-auto transition-width">
+                    <div role="presentation" class="flex h-full flex-col" >
+                        <div class="flex-1 overflow-hidden" >
+                            <div class="react-scroll-to-bottom--css-wscvj-79elbk h-full">
+                                <div class="react-scroll-to-bottom--css-wscvj-1n7m0yu">
+                                    <div id="chat-container" class="flex flex-col text-sm pb-9 scrollHeight">
+
+                                        <div class="sticky top-0 mb-1.5 flex items-center justify-between z-10 h-14 p-4 font-semibold bg-token-main-surface-primary">
+                                            <div class="absolute left-1/2 -translate-x-1/2" ></div>
+                                            <div class="flex items-center gap-2" >
+                                                <div class="group flex cursor-pointer items-center gap-1 rounded-xl py-2 px-3 text-lg font-medium hover:bg-token-main-surface-secondary radix-state-open:bg-token-main-surface-secondary"
+                                                     type="button" id="radix-:ral:" aria-haspopup="menu"
+                                                     aria-expanded="false" data-state="closed" >
+
+                                                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
+                                                         class="text-token-text-tertiary">
+                                                        <path d="none"
+                                                              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                              stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="centered-container" class="centered-container">
+                                            <h2>Upload an SRT File and Start Chatting!</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full pt-2 md:pt-0 dark:border-white/20 md:border-transparent md:dark:border-transparent md:w-[calc(100%-.5rem)] fixPosition">
+                                <div class="text-center left-0 right-0 hidden" id="showTempData">
+                                    <span class="py-2 px-4 text-base capitalize text-gray-600">
+                                        <span class="text-black">File Name: </span><span id="tempDataFileName">{{ session.temp_file }}</span>
+                                    </span>
+                                </div>
+                            <form id="userInputForm" class="stretch mx-2 flex flex-row gap-3 last:mb-2 md:mx-4 md:last:mb-6 lg:mx-auto lg:max-w-2xl xl:max-w-3xl">
+                                <button id="openAddFileModal" type="button" class="my-2 px-2 border rounded-lg text-black dark:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                </button>
+
+                               <div class="relative flex h-full flex-1 flex-col">
+                                    <div class="flex w-full items-center">
+                                        <div class="overflow-hidden [&amp;:has(texpromptTexttarea:focus)]:border-token-border-xheavy [&amp;:has(textarea:focus)]:shadow-[0_2px_6px_rgba(0,0,0,.05)] flex flex-col w-full dark:border-token-border-medium flex-grow relative border border-token-border-medium dark:text-white rounded-2xl bg-token-main-surface-primary">
+                                            <textarea id="prompt-textarea" tabindex="0"
+                                                      data-id="ca8f985e-55d6-482a-a89e-0c63e71bbcd7" rows="1"
+                                                      placeholder="Type your Prompt…"
+                                                      class="m-0 w-full resize-none border-0 bg-transparent focus:ring-0 focus-visible:ring-0 dark:bg-transparent max-h-25 py-[10px] pr-10 md:py-3.5 md:pr-12 placeholder-black/50 dark:placeholder-white/50 pl-3 md:pl-4"
+                                                      style="height: 52px; overflow-y: hidden;"
+                                                      spellcheck="false" autofocus required></textarea>
+                                            <button id="send-button" class="absolute bottom-1.5 right-2 rounded-lg border border-black bg-black p-0.5 text-white transition-colors enabled:bg-black disabled:text-gray-400 disabled:opacity-10 dark:border-white dark:bg-white dark:hover:bg-white md:bottom-3 md:right-3"
+                                                    data-testid="send-button" disabled>
+                                                <span class="" data-state="closed">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-white dark:text-black">
+                                                        <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                            <button id="stop-button" class="absolute bottom-1.5 right-2 rounded-lg border border-black bg-black p-0.5 text-white transition-colors enabled:bg-black disabled:text-gray-400 disabled:opacity-10 dark:border-white dark:bg-white dark:hover:bg-white md:bottom-3 md:right-3"
+                                                    data-testid="stop-button" style="display: none;">
+                                                <span class="" data-state="closed">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-white dark:text-black">
+                                                        <path d="M3 3h18v18H3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="relative px-2 py-2 text-center text-xs text-token-text-secondary md:px-[60px]"
+                                 ><span>GPT can make mistakes. Check important info.</span>
+                            </div>
+                        </div>
+            </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+
+<!-- The Add File Modal -->
+<div id="addFileModel" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span id="closeFileModel" class="close">&times;</span>
+        <div class="file-upload">
+            <div class="overlay absolute inset-0 flex items-center justify-center hidden" id="overlay">
+                <div class="animate-spin border-black rounded-full h-20 w-20 border-t-2 border-b-2 border-gray-900"></div>
+            </div>
+
+            <form id="uploadForm" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="uploadFormDiv mb-4">
+                    <input type="file" id="fileInput" name="file" class="file-input" accept=".txt" required>
+                    <label for="fileInput" class="file-label">Choose File</label>
+                    <div class="file-name" id="fileName">No file chosen</div>
+                </div>
+                <button type="submit" class="btn btn-light d-grid w-30" style="background-color: #0177ff; color: white;">Upload</button>
+            </form>
+        </div>
+  </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/3.1.0/clipboard-polyfill.promise.js"></script>
+<script>
+    // Get the modal and the button
+    var modal = document.getElementById("addFileModel");
+    var btn = document.getElementById("openAddFileModal");
+    var closeBtn = document.getElementById("closeFileModel");
+
+    // Function to open the modal
+    function openModal() {
+        modal.style.display = "block";
+    }
+
+    // Function to close the modal
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    // Event listener to open the modal when the button is clicked
+    btn.addEventListener("click", openModal);
+
+    // Event listener to close the modal when the close button is clicked
+    closeBtn.addEventListener("click", closeModal);
+
+    // Get file input and file name display elements
+    var fileInput = document.getElementById("fileInput");
+    var fileNameDisplay = document.getElementById("fileName");
+
+    // Function to update file name display
+    function updateFileNameDisplay() {
+        if (fileInput.files.length > 0) {
+            fileNameDisplay.textContent = fileInput.files[0].name;
+        } else {
+        console.log("No file.")
+            fileNameDisplay.textContent = "No file chosen";
+        }
+    }
+
+    // Event listener for file input change
+    fileInput.addEventListener("change", updateFileNameDisplay);
+
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var fileInput = document.getElementById('fileInput');
+        var overlayDiv = document.getElementById('overlay');
+        var showTempData = document.getElementById('showTempData');
+
+        if (fileInput.files.length === 0) {
+            alert("Please choose a file.");
+            return;
+        } else {
+            // Add blur effect to the container while uploading
+            overlayDiv.classList.remove('hidden');
+        }
+
+        var formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/upload/', true);
+        console.log('inside the upload');
+
+        xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) { // Check if the request is complete
+            // Remove blur effect after upload is complete
+            overlayDiv.classList.add('hidden');
+            // Reset the file input and file name display
+            fileInput.value = ''; // Clear the file input
+            fileNameDisplay.textContent = 'No file chosen'; // Reset file name display
+
+            if (xhr.status === 200) { // Check if the response status is OK
+                // Parse the response JSON
+                const jsonResponse = JSON.parse(xhr.responseText);
+                if (jsonResponse.success) {
+                    console.log(jsonResponse, jsonResponse.success,  "--------------");
+                    var spanElement = showTempData.querySelector('#tempDataFileName');
+                    spanElement.textContent = jsonResponse.file;
+                    showTempData.classList.remove('hidden');
+                    btn.classList.add('hidden');
+                    Swal.fire({
+                        icon: "success",
+                        title: jsonResponse.file+" added successfully",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            }
+            closeModal();
+        }
+    };
+        xhr.send(formData);
+        console.log(formData,'-----------------form');
+
+    });
+
+
+</script>
+<script>
+    const textarea = document.getElementById('prompt-textarea');
+    const sendButton = document.getElementById('send-button');
+
+    textarea.addEventListener('input', function () {
+        if (textarea.value.trim().length > 0) {
+            sendButton.removeAttribute('disabled');
+        } else {
+            sendButton.setAttribute('disabled', 'disabled');
+        }
+    });
+</script>
+
+<script src="{% static 'assets/js/javascript.js' %}"></script>
+<script src="{% static 'assets/vendor/libs/sweetalert2/sweetalert2.js' %}"></script>
+
+
+<script>
+    document.getElementById('chooseFileBtn').addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        const fileName = event.target.files.length > 0 ? event.target.files[0].name : 'No Files Chosen';
+        document.getElementById('fileName').textContent = fileName;
+    });
+
+    document.getElementById('uploadBtn').addEventListener('click', function() {
+        const fileInput = document.getElementById('fileInput');
+        if (fileInput.files.length === 0) {
+            alert('Please choose a file to upload.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        const ajax = new XMLHttpRequest();
+        ajax.open("POST", "/upload/", true);
+        ajax.setRequestHeader('X-CSRFToken', '{{ csrf_token }}'); // Set CSRF token for Django
+
+        // Event listeners for progress, load, error, and abort
+        ajax.send(formData);
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.addEventListener("load", completeHandler, false);
+        ajax.addEventListener("error", errorHandler, false);
+        ajax.addEventListener("abort", abortHandler, false);
+
+    });
+
+    function progressHandler(event) {
+        const loaded = event.loaded;
+        const total = event.total;
+        const percent = Math.round((loaded / total) * 100);
+
+        document.getElementById("loaded_n_total").innerHTML = "Uploaded " + loaded + " bytes of " + total;
+        document.getElementById("progressBar").value = percent;
+        document.getElementById("status").innerHTML = percent + "% uploaded... please wait";
+    }
+
+    function completeHandler(event) {
+        const response = JSON.parse(event.target.responseText);
+        document.getElementById("status").innerHTML = response.success ? "Upload Successful" : "Upload Failed";
+        document.getElementById("progressBar").value = 0; // Clear progress bar after successful upload
+
+        if (response.success) {
+            alert('File uploaded successfully: ' + response.file);
+            const cancelButton = document.querySelector('.btn.btn-outline-primary[data-bs-dismiss="modal"]');
+            if (cancelButton) {
+                cancelButton.click();
+            }
+            window.location.reload();
+        } else {
+            alert('Upload failed: ' + response.message);
+        }
+    }
+
+    function errorHandler(event) {
+        document.getElementById("status").innerHTML = "Upload Failed";
+    }
+
+    function abortHandler(event) {
+        document.getElementById("status").innerHTML = "Upload Aborted";
+    }
+</script>
+</body>
+</html>

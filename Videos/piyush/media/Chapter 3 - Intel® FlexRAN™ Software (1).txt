@@ -1,0 +1,372 @@
+WEBVTT
+
+00:00:01.200 --> 00:00:05.233
+Hello and welcome back to the
+vRAN Software course.
+
+00:00:05.300 --> 00:00:07.767
+This section will cover
+the software component
+
+00:00:07.767 --> 00:00:10.167
+of the
+FlexRAN Reference Architecture,
+
+00:00:10.200 --> 00:00:12.767
+which Intel provides.
+
+00:00:13.467 --> 00:00:17.067
+One of the main goals
+of operators for vRAN
+
+00:00:17.067 --> 00:00:19.600
+is to disaggregate the vRAN software
+
+00:00:19.600 --> 00:00:21.567
+from the vRAN hardware.
+
+00:00:21.600 --> 00:00:24.333
+This is done through
+abstraction of the hardware,
+
+00:00:24.367 --> 00:00:29.300
+both the hardware acceleration
+and also the instruction set.
+
+00:00:29.400 --> 00:00:31.067
+The hardware abstraction,
+
+00:00:31.067 --> 00:00:34.400
+the Forward Error Correction,
+or FEC acceleration
+
+00:00:34.400 --> 00:00:36.200
+is accomplished through the use
+
+00:00:36.200 --> 00:00:40.967
+of the now standard DPDK BBDEV API.
+
+00:00:41.067 --> 00:00:43.100
+FlexRAN uses this API
+
+00:00:43.200 --> 00:00:46.300
+to support different
+hardware acceleration options â€”
+
+00:00:46.333 --> 00:00:50.033
+FPGA and eASICs.
+
+00:00:50.167 --> 00:00:53.933
+To help scale across different
+generations of CPUs
+
+00:00:53.933 --> 00:00:55.767
+and instruction sets,
+
+00:00:55.800 --> 00:00:59.367
+like AVX2 and Intel AVX-512,
+
+00:00:59.767 --> 00:01:04.767
+the FlexRAN software uses
+the Intel C++ class libraries
+
+00:01:04.800 --> 00:01:09.667
+and C++ templates to abstract
+the underlying AVX instruction set
+
+00:01:09.700 --> 00:01:13.633
+from the FlexRAN
+SDK software implementation.
+
+00:01:14.067 --> 00:01:16.200
+This creates portable code
+
+00:01:16.200 --> 00:01:20.867
+that is still highly-optimized
+for the underlying CPU technology.
+
+00:01:20.900 --> 00:01:24.900
+By disaggregating the software
+from the hardware accelerators
+
+00:01:25.200 --> 00:01:28.767
+and the instruction sets,
+it allows us to build
+
+00:01:28.800 --> 00:01:32.633
+and run on any generation of
+Intel Xeon CPU
+
+00:01:32.667 --> 00:01:35.267
+and scale from the
+Small Cell deployments
+
+00:01:35.267 --> 00:01:38.033
+of Intel Xeon D up to the macro
+
+00:01:38.067 --> 00:01:42.867
+and C-RAN deployments on
+Intel Xeon Scalable processors.
+
+00:01:42.933 --> 00:01:46.600
+Another main tenant of
+General Purpose Processors
+
+00:01:46.633 --> 00:01:49.533
+and vRAN solutions is pooling
+
+00:01:49.567 --> 00:01:54.533
+where many 5G cells are executed
+on a pool of hardware resources,
+
+00:01:54.600 --> 00:01:58.700
+taking advantage of statistical
+averages across all the cells.
+
+00:01:58.767 --> 00:02:01.400
+The size of the pool
+of hardware resources
+
+00:02:01.433 --> 00:02:04.400
+is optimized
+for the particular deployment.
+
+00:02:04.433 --> 00:02:07.167
+For distributed deployments
+with a single box,
+
+00:02:07.200 --> 00:02:11.933
+32 core Intel Xeon processors
+can handle a lot of cells,
+
+00:02:11.967 --> 00:02:16.133
+and baseband
+pooling can provide a large gain.
+
+00:02:16.233 --> 00:02:20.100
+While in C-RAN deployments
+with a large rack of servers,
+
+00:02:20.167 --> 00:02:22.367
+pooling of cells across servers
+
+00:02:22.367 --> 00:02:25.333
+creates an even larger pool of cores.
+
+00:02:25.367 --> 00:02:29.333
+These concepts,
+such as Class 1 and Class 2 pooling,
+
+00:02:29.400 --> 00:02:31.667
+have been readily discussed in O-RAN
+
+00:02:31.667 --> 00:02:35.200
+and lend themselves to a virtualized,
+scalable solution
+
+00:02:35.200 --> 00:02:38.267
+such as that provided by FlexRAN.
+
+00:02:38.267 --> 00:02:42.100
+DU workloads can leverage
+standard Kubernetes cloud scaling
+
+00:02:42.133 --> 00:02:45.833
+techniques to scale out and
+scale in across
+
+00:02:45.833 --> 00:02:49.033
+the pool of servers and cores.
+
+00:02:49.033 --> 00:02:54.033
+Pooling is also necessary
+within the DU application itself.
+
+00:02:54.100 --> 00:02:57.033
+FlexRAN achieves
+pooling of CPU cores
+
+00:02:57.067 --> 00:03:00.333
+by using a scalable,
+task-oriented framework.
+
+00:03:00.367 --> 00:03:03.333
+The FlexRAN  software
+BBU pooling architecture
+
+00:03:03.333 --> 00:03:05.567
+takes the Layer 1 software,
+
+00:03:05.600 --> 00:03:08.367
+which is broken into smaller
+processing blocks,
+
+00:03:08.400 --> 00:03:12.167
+and distributes
+them across n-number of cores.
+
+00:03:12.867 --> 00:03:16.567
+The number of cores can scale
+based on the use case,
+
+00:03:16.567 --> 00:03:19.067
+from Small Cell 1 to 2 cores
+
+00:03:19.067 --> 00:03:23.367
+to large macro deployments
+up to 32 cores.
+
+00:03:23.567 --> 00:03:25.933
+The pooling framework also scales
+
+00:03:25.967 --> 00:03:27.867
+to support any number of cells
+
+00:03:27.967 --> 00:03:30.433
+from single cell to many cells,
+
+00:03:30.433 --> 00:03:34.300
+depending on bandwidth
+and CPU resources.
+
+00:03:34.700 --> 00:03:37.400
+In addition to scalability across
+'n' cores,
+
+00:03:37.400 --> 00:03:39.433
+the BBU pooling framework
+
+00:03:39.433 --> 00:03:41.400
+has also been optimized
+
+00:03:41.400 --> 00:03:45.067
+to take advantage
+of the Intel Xeon CPU C-states,
+
+00:03:45.133 --> 00:03:49.033
+which are energy-saving states
+in the CPU core.
+
+00:03:49.100 --> 00:03:52.433
+The run to completion model
+of the BBU pooling threads
+
+00:03:52.600 --> 00:03:56.700
+are perfectly suited to sleeping
+when there is no work to be done.
+
+00:03:56.700 --> 00:03:58.700
+During these sleep opportunities,
+
+00:03:58.700 --> 00:04:01.733
+the software will automatically enter
+the C1 state
+
+00:04:01.733 --> 00:04:03.567
+for short periods of time
+
+00:04:03.567 --> 00:04:07.467
+and the C6 state for longer periods
+to save power.
+
+00:04:07.467 --> 00:04:08.967
+Putting it all together,
+
+00:04:08.967 --> 00:04:12.933
+this diagram here shows a generic 5G,
+massive MIMO
+
+00:04:12.933 --> 00:04:15.400
+uplink and downlink
+pipeline
+
+00:04:15.400 --> 00:04:18.233
+that is used in the
+Intel FlexRAN software
+
+00:04:18.267 --> 00:04:21.000
+for a massive MIMO configuration.
+
+00:04:21.033 --> 00:04:23.533
+Each of these functions are tasks
+
+00:04:23.533 --> 00:04:26.333
+that are defined
+in the FlexRAN software,
+
+00:04:26.367 --> 00:04:29.500
+implemented using the
+FlexRAN SDK module
+
+00:04:29.600 --> 00:04:33.333
+with Intel AVX-512
+optimized functions.
+
+00:04:33.433 --> 00:04:36.100
+These tasks are then
+distributed across
+
+00:04:36.100 --> 00:04:40.767
+n-number of cores
+using the BBU pooling architecture.
+
+00:04:40.833 --> 00:04:44.600
+The BBU pooling architecture
+puts the Layer 1 functions
+
+00:04:44.600 --> 00:04:45.733
+into the pipeline
+
+00:04:45.733 --> 00:04:48.467
+that becomes
+the reference implementation.
+
+00:04:48.467 --> 00:04:52.167
+Tasks can then be split
+and distributed to execute
+
+00:04:52.167 --> 00:04:56.333
+in parallel on different
+threads of the BBU pooling software,
+
+00:04:56.367 --> 00:05:00.400
+achieving the low-latency performance
+required for 5G
+
+00:05:00.433 --> 00:05:04.533
+and Ultra-Reliable Low Latency
+Communication.
+
+00:05:05.067 --> 00:05:07.133
+So, we have seen Intel's
+
+00:05:07.133 --> 00:05:11.133
+impressive portfolio
+of vRAN software offerings,
+
+00:05:11.133 --> 00:05:13.633
+but the
+FlexRAN Reference Architecture
+
+00:05:13.633 --> 00:05:18.600
+does not form a commercial
+vRAN implementation on its own.
+
+00:05:18.633 --> 00:05:20.867
+It requires other software components
+
+00:05:20.867 --> 00:05:23.500
+from open-source and third parties
+
+00:05:23.500 --> 00:05:26.433
+to form a commercial vRAN deployment.
+
+00:05:26.500 --> 00:05:28.867
+In the last section,
+we will look at
+
+00:05:28.867 --> 00:05:31.333
+the Cloud Native RAN building blocks
+
+00:05:31.333 --> 00:05:34.233
+of a commercial vRAN implementation.

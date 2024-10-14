@@ -1,0 +1,1 @@
+Intel® Xeon® Scalable Processors,Intel® FPGA,Ethernet Products,vRAN,5G,Radio Access Technology,NFV,Network Slicing,Wireless,Radio Access Network,Communications Service Providers,Cloud Service Providers,Intel® Select Solutions,Ansible Playbooks,Service Mesh
